@@ -15,6 +15,8 @@ public class BinarySearchTreeDriver {
 
 		printBoomInfo(boom);
 
+		System.out.println(boom.lookup(1));
+
 		
 	}
 

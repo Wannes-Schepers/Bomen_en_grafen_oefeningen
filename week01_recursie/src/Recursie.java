@@ -67,7 +67,7 @@ public class Recursie {
             return 0;
         }
         else {
-            if ((s.substring(0, 2)).equals("hi")) {
+            if ((s).startsWith("hi")) {
                 return 1 + countHi(s.substring(2));
             } else
                 return countHi(s.substring(1));
@@ -88,25 +88,65 @@ public class Recursie {
     // oefening 7
 
     public static String changePi(String s) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (s == null)
+            throw new IllegalArgumentException();
+        if (s.length() <= 1)
+            return s;
+        else {
+            if ((s).startsWith("pi")) {
+                return "3.14" + Recursie.changePi(s.substring(2));
+            } else
+                return s.charAt(0) + Recursie.changePi(s.substring(1));
+        }
     }
 
     // oefening 8:
     public static int tweelog(int getal) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (getal <= 0)
+            throw new IllegalArgumentException();
+        if (getal == 1)
+            return 0;
+        else
+            return 1 + tweelog(getal / 2);
     }
 
     // oefening 9;
     public static double findMaximum(List<Double> lijst) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (lijst == null || lijst.size() == 0)
+            throw new IllegalArgumentException();
+        else if (lijst.size() == 1)
+            return lijst.get(0);
+        else {
+            double g = findMaximum(lijst.subList(1, lijst.size()));
+            if (lijst.get(0) > g)
+                return lijst.get(0);
+            else
+                return g;
+        }
     }
 
     // oefening 10;
     public static ArrayList<String> findSubstrings(String string) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+        if (string == null)
+            throw new IllegalArgumentException();
+        ArrayList<String> res = new ArrayList<String>();
+        if (string.length() <= 1) { //ook de lege string telt mee!
+            res.add(string);
+            return res;
+        }
+        else {
+            res.add(string.substring(0, 1));
+            ArrayList<String> res2 = findSubstrings(string.substring(1));
+            res.addAll(res2);
+            for (String s : res2) {
+                res.add(string.charAt(0) + s);
+            }
+            return res;
+        }    }
 
-    public static int aantalKaarten(int i) {
-        return 0;
+    public static int aantalKaarten(int n) {
+        if (n < 1) throw new IllegalArgumentException();
+        if (n == 1) return 2;
+        else return aantalKaarten(n-1) + (n-1) + 2 * n ;
     }
 }
